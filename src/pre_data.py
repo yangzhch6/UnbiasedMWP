@@ -484,9 +484,15 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
         '''
         if "output_prefix" in line: # 若字段包含output_prefix,则其一定为ground truth
             out_seq_prefix = line["output_prefix"].split(" ")
+        
+        # print(line['id'])
         # if len(out_seq_prefix) % 2 == 0:
         #     print(line['id'])
-        prefix_list = equivalent_expression_old(out_seq_prefix)
+        if len(out_seq_prefix) <= 17:
+            prefix_list = equivalent_expression_old(out_seq_prefix)
+        else:
+            prefix_list = [out_seq_prefix]
+
         ignore = False # 筛未检测变量的文本
         for s in out_seq_prefix:  
             if s[0].isdigit() and s not in generate_nums and trainset:
