@@ -1,0 +1,8 @@
+src/__pycache__
+data/old_all_data
+.vscode
+model
+runs
+test.py
+log
+tmp.py
