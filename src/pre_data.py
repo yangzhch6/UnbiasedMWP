@@ -427,70 +427,20 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
         out_seq = seg_and_tag(equation)
         out_seq_infix = out_seq
         out_seq_prefix = from_infix_to_prefix(out_seq)
-        '''
-        if ignore:
-            seg = list(jieba.cut(s))
 
-            # 忽略不是1, 2, 3.14的常数
-            IGNORE = False
-            for op in out_seq:
-                pattern = re.compile("\d*\(\d+/\d+\)\d*|\d+\.\d+%?|\d+%?")
-                pos = re.search(pattern, op)
-                if pos and pos.start() == 0 and op not in ['1', '2', '3.14']:
-                    IGNORE = True
-                    break
-            if IGNORE:
-                ignore_const += 1
-                continue
-            # ------------------------------------------
-            # 忽略纯数学问题
-            for t in mask_seq:
-                if t in ['+', '-', '*', 'residue', 'quotient', 'product', 'divisor', 'dividend']:
-                    IGNORE = True
-                    break
-            for t in seg:
-                if t in ['+', '-', '*', '余数', '商', '积', '除数', '被除数', '因数']:
-                    IGNORE = True
-                    break
-            """
-            for word in ['余数', '商', '积', '除数', '被除数', '因数']:
-                if word in seg["original_text"]: # 这样子做会将 "商店有10本书..."这种文本识别为IGNORE
-                    print(word)
-                    IGNORE = True
-                    break
-            """
-            if IGNORE:
-                # print(line["original_text"])
-                ignore_math += 1
-                continue
-            # ------------------------------------------
-            # 忽略奇怪操作符
-            for op in out_seq_prefix:
-                if op[0] == 'N' or op in ['1', '2', '3.14', '+', '-', '*', '/']:
-                    continue
-                else:
-                    IGNORE = True
-                    break
-            if IGNORE:
-                # print(out_seq_prefix)
-                ignore_op += 1
-                continue
-            # ------------------------------------------
-            # 忽略表达式长于9的, 忽略抽取数字个数多于5的
-            if len(out_seq_prefix) > 9 or len(nums) > 5: # 建议len(nums)>选择5,6,7
-                ignore_output_len += 1
-                continue
-            # ------------------------------------------
-        '''
         if "output_prefix" in line: # 若字段包含output_prefix,则其一定为ground truth
             out_seq_prefix = line["output_prefix"].split(" ")
         
         # print(line['id'])
         # if len(out_seq_prefix) % 2 == 0:
         #     print(line['id'])
-        if len(out_seq_prefix) <= 17:
+        if len(out_seq_prefix) <= 27:
             prefix_list = equivalent_expression_old(out_seq_prefix)
         else:
+            # print(line['id'])
+            # print(out_seq_infix)
+            # print('---------------------------------------')
+            # continue
             prefix_list = [out_seq_prefix]
 
         ignore = False # 筛未检测变量的文本
@@ -500,6 +450,7 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
             if s in generate_nums:
                 generate_nums_dict[s] = generate_nums_dict[s] + 1
         if ignore:
+            # print(line['id'])
             continue
 
         count_num_max = max(count_num_max, len(nums))
@@ -513,11 +464,6 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
             print("Different NUM!", line["id"])
 
         inter_prefix = list()
-        # print(equation, out_seq)
-        # print(out_seq_prefix)
-        # print(out_seq_prefix)
-        # print(prefix_list)
-        # print("---------------------------------------------")
         pairs.append({
             'original_text':line["original_text"].strip().split(" "),
             'tokens': tokens, # 对数字改为[NUM]后的token列表
@@ -529,14 +475,6 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
             'interpretation': line["interpretation"] if "interpretation" in line else {}, # 可解释性标注
             'inter_prefix':inter_prefix,# 可解释性标注的前序遍历logic
         })
-
-    # generate_num_select = [] #　只选择出现过5次以上的 常量
-    # for g in generate_nums:
-    #     if generate_nums_dict[g] >= 5:
-    #         generate_num_select.append(g)
-    #     else:
-    #         print("find barely used num:", g)
-
     return pairs, generate_nums, count_num_max#, ignore_list
     
 """
