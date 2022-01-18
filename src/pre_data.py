@@ -431,17 +431,11 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
         if "output_prefix" in line: # 若字段包含output_prefix,则其一定为ground truth
             out_seq_prefix = line["output_prefix"].split(" ")
         
-        # print(line['id'])
-        # if len(out_seq_prefix) % 2 == 0:
-        #     print(line['id'])
-        if len(out_seq_prefix) <= 27:
-            prefix_list = equivalent_expression_old(out_seq_prefix)
-        else:
-            # print(line['id'])
-            # print(out_seq_infix)
-            # print('---------------------------------------')
-            # continue
-            prefix_list = [out_seq_prefix]
+        try:
+             prefix_list = equivalent_expression_old(out_seq_prefix)
+        except:
+            print('ignore id:', line['id'])
+            continue
 
         ignore = False # 筛未检测变量的文本
         for s in out_seq_prefix:  
@@ -450,7 +444,7 @@ def transfer_num(data, tokenizer, mask=False, trainset=False):
             if s in generate_nums:
                 generate_nums_dict[s] = generate_nums_dict[s] + 1
         if ignore:
-            # print(line['id'])
+            print('ignore id:', line['id'])
             continue
 
         count_num_max = max(count_num_max, len(nums))

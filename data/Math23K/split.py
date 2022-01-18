@@ -50,7 +50,7 @@ def find_data(data, id):
     return find_list[0]
 
 train = load_raw_data('original/math23k_train.json')
-# write_json('train_all.json', train)
+write_json('train_all.json', train)
 test = load_raw_data('original/math23k_test.json')
 print(len(train), len(test))
 
@@ -77,9 +77,9 @@ for id in test_id:
 
 print(len(train_split), len(valid_split), len(test_split))
 
-# write_json('train.json', train_split)
-# write_json('valid.json', valid_split)
-# write_json('test.json', test_split)
+write_json('train.json', train_split)
+write_json('valid.json', valid_split)
+write_json('test.json', test_split)
 
 for line in train:
     find_data(train_split+valid_split, line['id'])
