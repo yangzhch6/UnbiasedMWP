@@ -1,5 +1,5 @@
 ## Fix Data 
-`processed/` is our ARR math23k data processed from original math23 dataset
+`processed_ARR/` is our ARR math23k data processed from original math23 dataset
 
 The Difference betweeen processed/ and the original data is 
 1. the data split (random choose 1k from original/math23k_train.json)
