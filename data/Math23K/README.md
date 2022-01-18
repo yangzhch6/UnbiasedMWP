@@ -1,25 +1,17 @@
-## File
-Only valid.json is different
-```
-own_processed: our own split validation set
-original: Math23K data
+## Fix Data 
+`processed/` is our ARR math23k data processed from original math23 dataset
 
-the own_processed/count.py proved that:
-    own_processed/train_all.json == train_all.json
-    own_processed/test.json == test.json
-
-```
-
-## id 8883 in train.json
-change the equation from `1-(-(1/2))` to `1+(1/2)`
-
-Our ARR:
-```
-    {
-        "id": "8883",
-        "original_text": "计算：1-(0-(1/2))=．",
-        "segmented_text": "计算 ： 1 - ( 0 - (1/2) ) = ．",
-        "output_original": "x=1-(0-(1/2))",
-        "ans": "(3)/(2)"
-    },
-```
+The Difference betweeen processed/ and the original data is 
+1. the data split (random choose 1k from original/math23k_train.json)
+2. fix id 8883 from original data
+    id 8883 
+    ```
+    change id 8883 to the follwing:
+        {
+            "id": "8883",
+            "original_text": "计算：1-(0-(1/2))=．",
+            "segmented_text": "计算 ： 1 - ( 0 - (1/2) ) = ．",
+            "output_original": "x=1-(0-(1/2))",
+            "ans": "(3)/(2)"
+        }
+    ```
