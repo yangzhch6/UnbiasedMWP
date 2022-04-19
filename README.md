@@ -1,4 +1,4 @@
-## Preparing
+# Preparing
 
 download chinese-bert-wwm from https://huggingface.co/hfl/chinese-bert-wwm
 
@@ -12,13 +12,13 @@ change the vocab.txt file as following:
 ...
 ```
 
-## UnbiasedMWP Dataset
+# UnbiasedMWP Dataset
 ```
 data/**_src: UnbiasedMWP-Source data in our paper
 data/**_all: UnbiasedMWP-All data in our paper
 ```
 
-## Training
+# Training
 General:
 ```
 CUDA_VISIBLE_DEVICES=0 python Filename
@@ -28,6 +28,19 @@ CUDA_VISIBLE_DEVICES=0 python Filename
     --valid_path // valid data path
     --test_path // test data path
 ```
+
+## Math23K
+**Equivalent Expression Generation of Math23K will take a long time, please wait for about 15 minutes.**   
+Bert2Tree Baseline:
+```
+CUDA_VISIBLE_DEVICES=7 python run_bert2tree.py --save_path model/math23k/bert2tree-split --save --train_path data/Math23K/Math23K-Split/train.json --valid_path data/Math23K/Math23K-Split/valid.json --test_path data/Math23K/Math23K-Split/test.json
+```
+
+Bert2Tree + DTS:
+```
+CUDA_VISIBLE_DEVICES=4 python run_bert2tree_dts.py --save_path model/math23k/bert2tree_dts-split --save --train_path data/Math23K/Math23K-Split/train.json --valid_path data/Math23K/Math23K-Split/valid.json --test_path data/Math23K/Math23K-Split/test.json
+```
+
 Bert2Tree baseline:
 ```
 CUDA_VISIBLE_DEVICES=0 python run_bert2tree.py 
@@ -37,7 +50,7 @@ CUDA_VISIBLE_DEVICES=0 python run_bert2tree.py
     --valid_path data/UnbiasedMWP-Source/valid_src.json
     --test_path data/UnbiasedMWP-Source/test_src.json
 ```
-Bert2Tree + DST:
+Bert2Tree + DTS:
 ```
 CUDA_VISIBLE_DEVICES=0 python run_bert2tree_dts.py 
     --save_path model/unbiasedmwp/bert2tree

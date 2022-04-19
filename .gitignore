@@ -6,3 +6,4 @@ runs
 test.py
 log
 tmp.py
+processed_data/

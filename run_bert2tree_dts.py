@@ -278,7 +278,8 @@ if __name__ == "__main__":
 
             is_best_valid = (best_val_ac_valid == float(value_ac)/eval_total)
             if best_val_ac_valid == float(value_ac)/eval_total and args.save:
-                encoder.savebert(args.save_path + "/pytorch_model.bin")
+                # encoder.savebert(args.save_path + "/pytorch_model.bin")
+                torch.save(encoder.state_dict(), "%s/encoder" % (args.save_path))
                 torch.save(predict.state_dict(), "%s/predict" % (args.save_path))
                 torch.save(generate.state_dict(), "%s/generate" % (args.save_path))
                 torch.save(merge.state_dict(), "%s/merge" % (args.save_path))
@@ -347,7 +348,8 @@ if __name__ == "__main__":
     print("__________________________________________________________________________________________")
     print("## Begin Testing ##")
     if args.save:
-        encoder = Encoder_Bert(bert_path = args.save_path)
+        # encoder = Encoder_Bert(bert_path = args.save_path)
+        encoder.load_state_dict(torch.load(args.save_path + '/encoder'))
         predict.load_state_dict(torch.load(args.save_path + '/predict'))
         generate.load_state_dict(torch.load(args.save_path + '/generate'))
         merge.load_state_dict(torch.load(args.save_path + '/merge'))
