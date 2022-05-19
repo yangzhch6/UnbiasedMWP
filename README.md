@@ -1,3 +1,10 @@
+This is the repository of our paper: [Unbiased Math Word Problems Benchmark for Mitigating Solving Bias](https://arxiv.org/abs/2205.08108)   
+```
+Zhicheng Yang, Jinghui Qin, Jiaqi Chen, Xiaodan Liang
+Unbiased Math Word Problems Benchmark for Mitigating Solving Bias
+Annual Conference of the North American Chapter of the Association for Computational Linguistics, 2022. (Findings of NAACL 2022)
+```
+
 # Preparing
 
 download chinese-bert-wwm from https://huggingface.co/hfl/chinese-bert-wwm
