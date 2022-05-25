@@ -21,8 +21,8 @@ change the vocab.txt file as following:
 
 # UnbiasedMWP Dataset
 ```
-data/**_src: UnbiasedMWP-Source data in our paper
-data/**_all: UnbiasedMWP-All data in our paper
+data/UnbiasedMWP/UnbiasedMWP-Src/: UnbiasedMWP-Source data in our paper
+data/UnbiasedMWP/UnbiasedMWP-All/: UnbiasedMWP-All data in our paper
 ```
 
 # Training
