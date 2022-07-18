@@ -1,8 +1,19 @@
-This is the repository of our paper: [Unbiased Math Word Problems Benchmark for Mitigating Solving Bias](https://arxiv.org/abs/2205.08108)   
+This is the repository of our paper: [Unbiased Math Word Problems Benchmark for Mitigating Solving Bias](https://aclanthology.org/2022.findings-naacl.104/)   
 ```
-Zhicheng Yang, Jinghui Qin, Jiaqi Chen, Xiaodan Liang
-Unbiased Math Word Problems Benchmark for Mitigating Solving Bias
-Annual Conference of the North American Chapter of the Association for Computational Linguistics, 2022. (Findings of NAACL 2022)
+@inproceedings{yang-etal-2022-unbiased,
+    title = "Unbiased Math Word Problems Benchmark for Mitigating Solving Bias",
+    author = "Yang, ZhiCheng  and
+      Qin, Jinghui  and
+      Chen, Jiaqi  and
+      Liang, Xiaodan",
+    booktitle = "Findings of the Association for Computational Linguistics: NAACL 2022",
+    month = jul,
+    year = "2022",
+    address = "Seattle, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.findings-naacl.104",
+    pages = "1401--1408",
+}
 ```
 
 # Preparing
