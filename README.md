@@ -20,7 +20,7 @@ This is the repository of our paper: [Unbiased Math Word Problems Benchmark for 
 
 download chinese-bert-wwm from https://huggingface.co/hfl/chinese-bert-wwm
 
-change the vocab.txt file as following:
+change the vocab.txt file as following: (**Note: Replace [unused1] with [NUM] instead of inserting it before [unused1]**)
 ```
 [PAD]
 [NUM]
